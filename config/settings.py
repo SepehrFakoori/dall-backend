@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt.token_blacklist",
 
     "apps.users",
+    "apps.authorization",
 ]
 
 MIDDLEWARE = [
@@ -88,6 +89,17 @@ DATABASES = {
         "PASSWORD": env.str("POSTGRES_PASSWORD", default="postgres"),
         "HOST": env.str("POSTGRES_HOST", default="db"),
         "PORT": env.int("POSTGRES_PORT", default=5432),
+    }
+}
+
+
+# Cache
+# https://docs.djangoproject.com/en/6.1/topics/cache/
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": env.str("REDIS_CACHE_URL", default="redis://redis:6379/0"),
     }
 }
 
