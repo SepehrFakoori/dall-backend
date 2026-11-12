@@ -1,0 +1,27 @@
+# Secrets and env files
+envs/
+.env*
+
+# Version control and editor files
+.git
+.gitignore
+.idea
+
+# Python junk
+**/__pycache__
+**/*.py[cod]
+.venv
+venv
+.pytest_cache
+.mypy_cache
+.ruff_cache
+
+# Local data and generated files
+db.sqlite3
+staticfiles/
+media/
+
+# Docker files
+Dockerfile
+.dockerignore
+docker-compose*.yaml
