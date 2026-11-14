@@ -41,6 +41,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 class LoginView(TokenObtainPairView):
     serializer_class = LoginSerializer
+    throttle_scope = "login"
 
 
 def blacklist_all_tokens(user):
