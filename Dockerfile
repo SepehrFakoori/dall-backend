@@ -5,6 +5,10 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /usr/src/core
 
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends gettext \
+    && rm -rf /var/lib/apt/lists/*
+
 COPY ./requirements.txt .
 
 RUN pip install -i https://mirror-pypi.runflare.com/simple --no-cache-dir --upgrade pip  \
