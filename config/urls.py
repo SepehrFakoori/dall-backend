@@ -26,5 +26,5 @@ urlpatterns = [
     path('api/docs/', SpectacularSwaggerView.as_view(), name='swagger-ui'),
     path('api/redoc/', SpectacularRedocView.as_view(), name='redoc'),
 
-    path('auth/', include('apps.users.urls'))
+    path('', include('apps.users.urls'))
 ]
