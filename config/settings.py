@@ -168,7 +168,7 @@ REST_FRAMEWORK = {
 
 # SPECTACULAR
 SPECTACULAR_SETTINGS = {
-    "TITLE": "Dall API",
+    "TITLE": f"Dall API{' (DEV)' if DEBUG else ''}",
     "DESCRIPTION": "Dall Backend API Documentation",
     "VERSION": "1.0.0",
 }

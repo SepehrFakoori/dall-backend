@@ -1,15 +1,15 @@
 services:
   db:
-    container_name: dall_db_stage
+    container_name: dall_db_staging
     env_file:
-      - envs/env.staging
+      - envs/.env.staging
     ports:
       - "5432:5432"
 
   backend:
-    container_name: dall_backend_stage
+    container_name: dall_backend_staging
     env_file:
-      - envs/env.staging
+      - envs/.env.staging
     ports:
       - "8000:8000"
     command:

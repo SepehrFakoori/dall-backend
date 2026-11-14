@@ -161,7 +161,7 @@ venv.bak/
 
 # Environment configuration files
 envs/*
-!envs/env.sample
+!envs/.env.sample
 
 # Spyder project settings
 .spyderproject

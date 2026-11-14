@@ -2,14 +2,14 @@ services:
   db:
     container_name: dall_db
     env_file:
-      - envs/env.prod
+      - envs/.env.prod
     ports:
       - "5432:5432"
 
   backend:
     container_name: dall_backend
     env_file:
-      - envs/env.prod
+      - envs/.env.prod
     ports:
       - "8000:8000"
     command:
