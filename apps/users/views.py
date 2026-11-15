@@ -12,11 +12,22 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import User
 from .serializers import UserSerializer, ChangePasswordSerializer, LoginSerializer
+from apps.authorization.permissions import HasRBPermission
 
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated, HasRBPermission]
+
+    required_permissions = {
+        "list": "users.view",
+        "retrieve": "users.view",
+        "create": "users.create",
+        "update": "users.update",
+        "partial_update": "users.update",
+        "destroy": "users.delete",
+    }
 
     @action(
         detail=False,
