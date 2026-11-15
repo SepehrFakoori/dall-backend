@@ -1,7 +1,9 @@
 from django.db import models
 
+from core.models.base import SoftDeleteModel
 
-class Role(models.Model):
+
+class Role(SoftDeleteModel):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
 

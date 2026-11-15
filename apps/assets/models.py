@@ -1,7 +1,9 @@
 from django.db import models
 
+from core.models.base import SoftDeleteModel
 
-class Asset(models.Model):
+
+class Asset(SoftDeleteModel):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
 
