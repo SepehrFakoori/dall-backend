@@ -5,6 +5,7 @@ from rest_framework_simplejwt.views import TokenRefreshView, TokenBlacklistView
 from .views import UserViewSet, ChangePasswordView, LoginView
 
 router = DefaultRouter()
+
 router.register("users", UserViewSet)
 
 urlpatterns = router.urls + [
