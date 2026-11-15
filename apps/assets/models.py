@@ -1,9 +1,11 @@
 from django.db import models
 
-from core.models.base import SoftDeleteModel
+from core.models import SoftDeleteModel, SerialModel
 
 
-class Asset(SoftDeleteModel):
+class Asset(SoftDeleteModel, SerialModel):
+    serial_prefix = "AST"
+
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
 

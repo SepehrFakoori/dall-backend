@@ -1,6 +1,6 @@
 from django.db import models
 
-from core.models.base import SoftDeleteModel
+from core.models import SoftDeleteModel
 
 
 class Role(SoftDeleteModel):
