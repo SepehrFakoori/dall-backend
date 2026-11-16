@@ -5,4 +5,4 @@ from .models import Asset
 
 @admin.register(Asset)
 class AssetAdmin(admin.ModelAdmin):
-    list_display = ["id", "serial", "name", "created_at"]
+    list_display = ("id", "serial", "name", "created_at")
