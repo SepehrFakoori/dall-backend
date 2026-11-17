@@ -9,5 +9,5 @@ django.setup()
 
 from core.mcp.server import create_server
 
-server = create_server()
-application = server.http_app(path="/mcp", stateless_http=True)
+mcp = create_server()
+application = mcp.http_app(path="/mcp", stateless_http=True)
