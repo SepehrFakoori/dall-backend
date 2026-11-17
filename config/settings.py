@@ -24,7 +24,7 @@ env = environ.Env()
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env.str("SECRET_KEY", default="django-insecure-8yodz7a#*amk=88npsg00$xm0%j2)gc0_th(chp*cr^r^6s_wh")
 
-# SECURITY WARNING: don"t run with debug turned on in production!
+# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DEBUG", default=False)
 
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=["*"])
@@ -168,6 +168,7 @@ MAILERS = {
 
 
 # REST FRAMEWORK
+
 REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     "DEFAULT_AUTHENTICATION_CLASSES": (
@@ -195,6 +196,7 @@ REST_FRAMEWORK = {
 
 
 # SPECTACULAR
+
 SPECTACULAR_SETTINGS = {
     "TITLE": f"Dall API{' (DEV)' if DEBUG else ''}",
     "DESCRIPTION": "Dall Backend API Documentation",
@@ -203,6 +205,7 @@ SPECTACULAR_SETTINGS = {
 
 
 # JWT
+
 from datetime import timedelta
 
 SIMPLE_JWT = {
