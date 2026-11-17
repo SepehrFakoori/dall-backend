@@ -216,3 +216,11 @@ SIMPLE_JWT = {
     "ROTATE_REFRESH_TOKEN": True,
     "BLACKLIST_AFTER_ROTATION": True,
 }
+
+
+# Explicitly enabled MCP app server factories, keyed by tool namespace.
+# Currently unauthenticated: register only tools suitable for public access.
+
+MCP_SERVERS = {
+    "system": "core.mcp.system.create_server",
+}
