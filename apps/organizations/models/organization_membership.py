@@ -1,6 +1,8 @@
 from django.db import models
 from django.conf import settings
 
+from .organization_membership_queryset import OrganizationMembershipQuerySet
+
 
 class OrganizationMembership(models.Model):
     organization = models.ForeignKey(
@@ -17,6 +19,8 @@ class OrganizationMembership(models.Model):
     is_active = models.BooleanField(default=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
+
+    objects = OrganizationMembershipQuerySet.as_manager()
 
     class Meta:
         constraints = [

@@ -1,5 +1,7 @@
 from django.db import models
 
+from .organization_unit_queryset import OrganizationUnitQuerySet
+
 
 class OrganizationUnit(models.Model):
     class Type(models.TextChoices):
@@ -23,6 +25,8 @@ class OrganizationUnit(models.Model):
         choices=Type.choices,
         default=Type.DEPARTMENT,
     )
+
+    objects = OrganizationUnitQuerySet.as_manager()
 
     class Meta:
         constraints = [
