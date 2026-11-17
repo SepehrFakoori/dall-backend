@@ -7,8 +7,8 @@ class OrganizationUnitQuerySet(models.QuerySet):
         return self.filter(organization=organization)
 
     def for_user(self, user):
-        """All units in nondeleted organizations where the user is an active member.
-
+        """
+        All units in nondeleted organizations where the user is an active member.
         This scopes by organization membership, not individual unit assignment.
         """
         if not user.is_authenticated or user.pk is None:

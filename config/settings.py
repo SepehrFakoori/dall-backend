@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     "apps.authorization",
     "apps.organizations",
     "apps.catalogs",
+    "apps.locations",
     "apps.assets",
     "apps.projects",
 ]
