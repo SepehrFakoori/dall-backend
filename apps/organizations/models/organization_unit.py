@@ -12,7 +12,7 @@ class OrganizationUnit(models.Model):
     organization = models.ForeignKey(
         "organizations.Organization",
         on_delete=models.CASCADE,
-        related_name="units",
+        related_name="organization_units",
     )
     parent = models.ForeignKey(
         "self",
