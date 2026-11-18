@@ -47,11 +47,6 @@ INSTALLED_APPS = [
 
     "apps.users",
     "apps.authorization",
-    "apps.organizations",
-    "apps.catalogs",
-    "apps.locations",
-    "apps.assets",
-    "apps.projects",
 ]
 
 MIDDLEWARE = [
