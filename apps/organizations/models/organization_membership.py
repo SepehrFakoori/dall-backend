@@ -20,7 +20,7 @@ class OrganizationMembership(models.Model):
         constraints = [
             models.UniqueConstraint(
                 fields=["user", "organization"],
-                name="unique_membership",
+                name="unique_dpt_membership",
             )
         ]
 

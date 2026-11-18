@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 from rest_framework.decorators import action
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import DjangoModelPermissions, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.generics import GenericAPIView
 from rest_framework_simplejwt.token_blacklist.models import (
@@ -12,22 +12,20 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 
 from .models import User
 from .serializers import UserSerializer, ChangePasswordSerializer, LoginSerializer
-from apps.authorization.permissions import HasRBPermission
+
+
+class UserModelPermissions(DjangoModelPermissions):
+    perms_map = {
+        **DjangoModelPermissions.perms_map,
+        "GET": ["%(app_label)s.view_%(model_name)s"],
+        "HEAD": ["%(app_label)s.view_%(model_name)s"],
+    }
 
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated, HasRBPermission]
-
-    required_permissions = {
-        "list": "users.view",
-        "retrieve": "users.view",
-        "create": "users.create",
-        "update": "users.update",
-        "partial_update": "users.update",
-        "destroy": "users.delete",
-    }
+    permission_classes = (UserModelPermissions,)
 
     @action(
         detail=False,
@@ -62,7 +60,7 @@ def blacklist_all_tokens(user):
 
 class ChangePasswordView(GenericAPIView):
     serializer_class = ChangePasswordSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = (IsAuthenticated,)
 
     def post(self, request):
         serializer = self.get_serializer(data=request.data)

@@ -1,3 +1,5 @@
 from .organization import Organization
 from .organization_membership import OrganizationMembership
 from .organization_scoped_model import OrganizationScopedModel
+from .department import Department
+from .department_membership import DepartmentMembership

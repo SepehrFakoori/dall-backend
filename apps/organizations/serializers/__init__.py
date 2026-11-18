@@ -1,2 +1,4 @@
 from .organization import OrganizationSerializer
 from .organization_membership import OrganizationMembershipSerializer
+from .department import DepartmentSerializer
+from .department_membership import DepartmentMembershipSerializer
