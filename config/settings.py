@@ -218,7 +218,6 @@ SIMPLE_JWT = {
 
 MCP_SERVERS = {
     "system": "core.mcp.system.create_server",
-    "assets": "apps.assets.mcp.create_server",
 }
 
 
