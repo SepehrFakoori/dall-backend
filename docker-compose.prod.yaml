@@ -6,6 +6,25 @@ services:
     ports:
       - "5432:5432"
 
+  mcp:
+    container_name: dall_mcp
+    env_file:
+      - envs/.env.prod
+    ports:
+      - "8001:8001"
+    command:
+      - python
+      - -m
+      - uvicorn
+      - config.mcp:application
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8001"
+      - --reload
+    volumes:
+      - .:/usr/src/core
+
   backend:
     container_name: dall_backend
     env_file:

@@ -7,7 +7,6 @@ import django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 django.setup()
 
-from core.mcp.server import create_server
+from core.mcp.http import create_application
 
-mcp = create_server()
-application = mcp.http_app(path="/mcp", stateless_http=True)
+application = create_application()

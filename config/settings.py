@@ -223,4 +223,12 @@ SIMPLE_JWT = {
 
 MCP_SERVERS = {
     "system": "core.mcp.system.create_server",
+    "assets": "apps.assets.mcp.create_server",
 }
+
+
+# Additional trusted hosts/origins for the separate MCP HTTP application.
+# FastMCP also allows loopback/bound hosts and same-origin requests.
+
+MCP_ALLOWED_HOSTS = env.list("MCP_ALLOWED_HOSTS", default=[])
+MCP_ALLOWED_ORIGINS = env.list("MCP_ALLOWED_ORIGINS", default=[])
