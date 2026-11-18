@@ -10,13 +10,13 @@ from .models import (
 
 @admin.register(Organization)
 class OrganizationAdmin(admin.ModelAdmin):
-    list_display = ("id", "name")
+    list_display = ("id", "name", "created_at", "updated_at")
     search_fields = ("name",)
 
 
 @admin.register(OrganizationMembership)
 class OrganizationMembershipAdmin(admin.ModelAdmin):
-    list_display = ("organization", "user", "is_active")
+    list_display = ("organization", "user", "is_active", "created_at", "updated_at")
     list_filter = ("is_active",)
     list_select_related = ("organization", "user")
     # raw_id_fields = ("organization", "user")
@@ -31,7 +31,7 @@ class DepartmentAdmin(admin.ModelAdmin):
 
 @admin.register(DepartmentMembership)
 class DepartmentMembershipAdmin(admin.ModelAdmin):
-    list_display = ("department", "user")
+    list_display = ("department", "user", "created_at", "updated_at")
     list_select_related = ("department", "user")
     # raw_id_fields = ("department", "user")
     search_fields = ("department__name", "user__username")

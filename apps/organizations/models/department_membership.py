@@ -14,7 +14,11 @@ class DepartmentMembership(models.Model):
         related_name="Departments",  # department_memberships
     )
 
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
     class Meta:
+        ordering = ["-created_at"]
         constraints = [
             models.UniqueConstraint(
                 fields=["user", "department"],
