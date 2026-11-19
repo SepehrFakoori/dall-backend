@@ -45,9 +45,11 @@ INSTALLED_APPS = [
     "django_filters",
     "rest_framework_simplejwt.token_blacklist",
 
+    "core",
     "apps.users",
     "apps.organizations",
     "apps.projects",
+    "apps.technical",
 ]
 
 MIDDLEWARE = [

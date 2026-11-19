@@ -1,11 +1,12 @@
 from django.db import models
 
-from core.models import SerialModel
+from core.models import ScopedSerialModel
 from apps.organizations.models import OrganizationScopedModel
 
 
-class Project(OrganizationScopedModel, SerialModel):
+class Project(OrganizationScopedModel, ScopedSerialModel):
     serial_prefix = "PRJ"
+    serial_scope_field = "organization"
 
     title = models.CharField(max_length=100, verbose_name="Project title")
     name = models.CharField(max_length=100, verbose_name="Internal name", blank=True)

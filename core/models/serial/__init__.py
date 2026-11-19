@@ -1,1 +1,1 @@
-from .base import SerialModel
+from .base import ScopedSerialModel
