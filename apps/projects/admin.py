@@ -5,7 +5,7 @@ from .models import Project
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = [
+    list_display = (
         "id",
         "serial",
         "title",
@@ -14,4 +14,4 @@ class ProjectAdmin(admin.ModelAdmin):
         "description",
         "created_at",
         "updated_at",
-    ]
+    )
