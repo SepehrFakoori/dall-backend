@@ -1,2 +1,2 @@
 from .bank import Bank
-from .check import Check
+from .check import CheckType, CheckStatus, Check
