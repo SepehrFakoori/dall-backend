@@ -1,11 +1,15 @@
 from django.db import models
 
+from .querysets import OrganizationQuerySet
+
 
 class Organization(models.Model):
     name = models.CharField(max_length=255)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    objects = OrganizationQuerySet.as_manager()
 
     class Meta:
         ordering = ["name", "-created_at"]
