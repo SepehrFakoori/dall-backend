@@ -7,7 +7,6 @@ from rest_framework.permissions import (
 )
 
 from apps.projects.models import Project, Use
-
 from .models import (
     Block,
     City,
@@ -121,13 +120,13 @@ class LocationViewSet(ProjectScopedViewSet):
     serializer_class = LocationSerializer
 
 
-class ProvinceViewSet(viewsets.ModelViewSet):
+class ProvinceViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Province.objects.all()
     serializer_class = ProvinceSerializer
     permission_classes = (DjangoModelPermissionsOrAnonReadOnly,)
 
 
-class CityViewSet(viewsets.ModelViewSet):
+class CityViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = City.objects.all()
     serializer_class = CitySerializer
     permission_classes = (DjangoModelPermissionsOrAnonReadOnly,)
