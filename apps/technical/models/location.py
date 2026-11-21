@@ -39,10 +39,12 @@ class Location(ProjectScopedModel):
     province = models.ForeignKey(
         Province,
         on_delete=models.SET_NULL,
+        null=True,
     )
     city = models.ForeignKey(
         City,
         on_delete=models.SET_NULL,
+        null=True,
     )
     town = models.CharField(max_length=100, blank=True)
     address = models.TextField()
