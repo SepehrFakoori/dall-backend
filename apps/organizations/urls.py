@@ -11,7 +11,7 @@ from .views import (
 router = DefaultRouter()
 
 router.register(
-    "organizations",
+    "orgs",
     OrganizationViewSet,
     basename="organization",
 )
@@ -20,7 +20,7 @@ router.register(
 # Organization nested router
 organizations_router = NestedDefaultRouter(
     router,
-    "organizations",
+    "orgs",
     lookup="organization",
 )
 

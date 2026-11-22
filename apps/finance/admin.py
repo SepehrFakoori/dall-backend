@@ -1,11 +1,11 @@
 from django.contrib import admin
 
-from .models import Bank, Check
+from .models import BankAccount, Check
 
 
-@admin.register(Bank)
-class BankAdmin(admin.ModelAdmin):
-    list_display = ("name", "account_number")
+@admin.register(BankAccount)
+class BankAccountAdmin(admin.ModelAdmin):
+    list_display = ("bank_name", "account_number")
 
 
 @admin.register(Check)

@@ -1,17 +1,23 @@
 from rest_framework import viewsets
 
-from .models import Bank, CheckType, CheckStatus, Check
+from .models import AccountType, BankAccount, CheckType, CheckStatus, Check
 from .serializers import (
-    BankSerializer,
+    AccountTypeSerializer,
+    BankAccountSerializer,
     CheckSerializer,
     CheckTypeSerializer,
     CheckStatusSerializer,
 )
 
 
-class BankViewSet(viewsets.ModelViewSet):
-    queryset = Bank.objects.all()
-    serializer_class = BankSerializer
+class AccountTypeViewSet(viewsets.ModelViewSet):
+    queryset = AccountType.objects.all()
+    serializer_class = AccountTypeSerializer
+
+
+class BankAccountViewSet(viewsets.ModelViewSet):
+    queryset = BankAccount.objects.all()
+    serializer_class = BankAccountSerializer
 
 
 class CheckTypeViewSet(viewsets.ModelViewSet):
@@ -25,5 +31,5 @@ class CheckStatusViewSet(viewsets.ModelViewSet):
 
 
 class CheckViewSet(viewsets.ModelViewSet):
-    queryset = Check.objects.all()
+    queryset = Check.objects.select_related("type")
     serializer_class = CheckSerializer
