@@ -10,16 +10,32 @@ class CheckDirection(models.TextChoices):
 
 
 class CheckType(OrganizationScopedModel):
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100)
     type = models.CharField(max_length=10, choices=CheckDirection.choices)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["organization", "name"],
+                name="unique_check_type_per_organization",
+            ),
+        ]
 
     def __str__(self) -> str:
         return f"{self.name} @ {self.type}"
 
 
 class CheckStatus(OrganizationScopedModel):
-    name = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=255)
     type = models.CharField(max_length=10, choices=CheckDirection.choices)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=["organization", "name"],
+                name="unique_check_status_per_organization",
+            ),
+        ]
 
     def __str__(self) -> str:
         return f"{self.name} @ {self.type}"
