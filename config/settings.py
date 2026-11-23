@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 
     "core",
     "apps.users",
+    "apps.tenants",
     "apps.organizations",
     "apps.projects",
     "apps.technical",

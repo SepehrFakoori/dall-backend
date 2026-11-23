@@ -1,16 +1,16 @@
 from django.db import models
 
-from apps.organizations.models import OrganizationScopedModel
+from apps.tenants.models import TenantScopeModel
 
 
-class AccountType(OrganizationScopedModel):
+class AccountType(TenantScopeModel):
     name = models.CharField(max_length=100)
 
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["organization", "name"],
-                name="unique_account_type_per_organization",
+                fields=["tenant", "name"],
+                name="unique_account_type_per_tenant",
             ),
         ]
 
@@ -18,7 +18,7 @@ class AccountType(OrganizationScopedModel):
         return self.name
 
 
-class BankAccount(OrganizationScopedModel):
+class BankAccount(TenantScopeModel):
     bank_name = models.CharField(max_length=255)
     branch_name = models.CharField(max_length=100, blank=True)
     account_number = models.CharField(max_length=20)
@@ -30,12 +30,12 @@ class BankAccount(OrganizationScopedModel):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["organization", "account_number"],
-                name="unique_account_number_per_organization",
+                fields=["tenant", "account_number"],
+                name="unique_account_number_per_tenant",
             ),
             models.UniqueConstraint(
-                fields=["organization", "iban"],
-                name="unique_iban_per_organization",
+                fields=["tenant", "iban"],
+                name="unique_iban_per_tenant",
             ),
         ]
 

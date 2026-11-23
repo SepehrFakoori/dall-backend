@@ -37,8 +37,8 @@ class ProjectScopedViewSet(viewsets.ModelViewSet):
         if user.is_superuser:
             return Project.objects.all()
         return Project.objects.filter(
-            organization__memberships__user=user,
-            organization__memberships__is_active=True,
+            tenant__memberships__user=user,
+            tenant__memberships__is_active=True,
         )
 
     @cached_property
@@ -109,8 +109,8 @@ class ProjectProfileViewSet(ProjectScopedViewSet):
             user = self.request.user
             if not user.is_superuser:
                 serializer.fields["uses"].child_relation.queryset = Use.objects.filter(
-                    organization__memberships__user=user,
-                    organization__memberships__is_active=True,
+                    tenant__memberships__user=user,
+                    tenant__memberships__is_active=True,
                 )
         return serializer
 

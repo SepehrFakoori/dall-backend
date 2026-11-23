@@ -1,36 +1,39 @@
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
-from django.db import IntegrityError, transaction
-from django.utils.translation import gettext_lazy as _
+from django.db import transaction
+from django.db.utils import IntegrityError
 
 from apps.users.models import User
-from .models import Organization, OrganizationMembership
+from ..models import Tenant, Membership
 
 
-def create_organization_member(
+def create_tenant_member(
     *,
-    organization: Organization,
+    tenant: Tenant,
     username: str,
     password: str,
-    first_name: str = "",
-    last_name: str = "",
-) -> OrganizationMembership:
-    """Provision an active membership using validated account profile fields."""
+    first_name: str,
+    last_name: str,
+) -> Membership:
+    """
+    Provision an active membership using validated account profile fields.
+    """
     user_fields = {
         "username": User.normalize_username(username),
         "first_name": first_name,
         "last_name": last_name,
     }
+
     try:
-        validate_password(password, user=User(**user_fields))
+        validate_password(password=password, user=User(**user_fields))
     except ValidationError as exc:
         raise ValidationError({"password": exc.error_list}) from exc
 
     try:
         with transaction.atomic():
             user = User.objects.create_user(password=password, **user_fields)
-            return OrganizationMembership.objects.create(
-                organization=organization,
+            return Membership.objects.create(
+                tenant=tenant,
                 user=user,
             )
     except IntegrityError as exc:
@@ -39,7 +42,7 @@ def create_organization_member(
             raise ValidationError(
                 {
                     "username": ValidationError(
-                        _("A user with that username already exists."),
+                        "username already exists.",
                         code="unique",
                     )
                 }

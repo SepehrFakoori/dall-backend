@@ -1,17 +1,16 @@
-from django.conf import settings
 from django.db import models
 
 
 class DepartmentMembership(models.Model):
+    membership = models.ForeignKey(
+        "tenants.Membership",
+        on_delete=models.CASCADE,
+        related_name="departments",  # department_memberships
+    )
     department = models.ForeignKey(
         "organizations.Department",
         on_delete=models.CASCADE,
         related_name="memberships",
-    )
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        related_name="Departments",  # department_memberships
     )
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -21,10 +20,10 @@ class DepartmentMembership(models.Model):
         ordering = ["-created_at"]
         constraints = [
             models.UniqueConstraint(
-                fields=["user", "department"],
-                name="unique_org_membership",
+                fields=["membership", "department"],
+                name="unique_department_membership",
             )
         ]
 
     def __str__(self) -> str:
-        return f"{self.user} @ {self.department}"
+        return f"{self.membership} @ {self.department}"

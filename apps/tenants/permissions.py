@@ -1,9 +1,9 @@
 from rest_framework.permissions import BasePermission
 
 
-class IsOrganizationMember(BasePermission):
+class IsTenantMember(BasePermission):
     def has_permission(self, request, view):
         return request.user.is_authenticated
 
     def has_object_permission(self, request, view, obj):
-        return obj.organization_id == request.user.organization_id
+        return obj.tenant_id == request.user.tenant_id

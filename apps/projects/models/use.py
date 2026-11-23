@@ -1,16 +1,16 @@
 from django.db import models
 
-from apps.organizations.models import OrganizationScopedModel
+from apps.tenants.models import TenantScopeModel
 
 
-class Use(OrganizationScopedModel):
+class Use(TenantScopeModel):
     name = models.CharField(max_length=100)
 
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["organization", "name"],
-                name="unique_use_per_organization",
+                fields=["tenant", "name"],
+                name="unique_use_per_tenant",
             ),
         ]
 

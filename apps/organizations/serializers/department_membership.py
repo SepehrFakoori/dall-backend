@@ -6,4 +6,4 @@ from ..models import DepartmentMembership
 class DepartmentMembershipSerializer(serializers.ModelSerializer):
     class Meta:
         model = DepartmentMembership
-        fields = ["id", "department", "user"]
+        fields = ["id", "department", "membership"]

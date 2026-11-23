@@ -1,7 +1,7 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
-from apps.organizations.models import OrganizationScopedModel
+from apps.tenants.models import TenantScopeModel
 
 
 class CheckDirection(models.TextChoices):
@@ -9,15 +9,15 @@ class CheckDirection(models.TextChoices):
     ISSUED = "issued"
 
 
-class CheckType(OrganizationScopedModel):
+class CheckType(TenantScopeModel):
     name = models.CharField(max_length=100)
     type = models.CharField(max_length=10, choices=CheckDirection.choices)
 
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["organization", "name"],
-                name="unique_check_type_per_organization",
+                fields=["tenant", "name"],
+                name="unique_check_type_per_tenant",
             ),
         ]
 
@@ -25,15 +25,15 @@ class CheckType(OrganizationScopedModel):
         return f"{self.name} @ {self.type}"
 
 
-class CheckStatus(OrganizationScopedModel):
+class CheckStatus(TenantScopeModel):
     name = models.CharField(max_length=255)
     type = models.CharField(max_length=10, choices=CheckDirection.choices)
 
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["organization", "name"],
-                name="unique_check_status_per_organization",
+                fields=["tenant", "name"],
+                name="unique_check_status_per_tenant",
             ),
         ]
 
@@ -41,7 +41,7 @@ class CheckStatus(OrganizationScopedModel):
         return f"{self.name} @ {self.type}"
 
 
-class Check(OrganizationScopedModel):
+class Check(TenantScopeModel):
     purpose = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     sayad_id = models.CharField(max_length=100)

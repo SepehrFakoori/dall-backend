@@ -1,30 +1,29 @@
 from collections.abc import Mapping
 
-from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
 
-from apps.users.models import User
 from apps.users.serializers import UserSerializer
-from ..models import OrganizationMembership
+from apps.users.models import User
+from ..models import Membership
 
 
-class OrganizationMembershipSerializer(serializers.ModelSerializer):
+class MembershipSerializer(serializers.ModelSerializer):
     class Meta:
-        model = OrganizationMembership
-        fields = ["id", "organization", "user"]
+        model = Membership
+        fields = "__all__"
 
-    def validate_organization(self, organization):
-        route_organization = self.context.get("organization")
-        if route_organization is not None and organization != route_organization:
-            raise serializers.ValidationError(_("Use the organization from the URL."))
-        return organization
+    def validate_tenant(self, tenant):
+        route_tenant = self.context.get("tenant")
+        if route_tenant is not None and tenant != route_tenant:
+            raise serializers.ValidationError("Use the tenant from the URL.")
+        return tenant
 
 
-class CreatedOrganizationMembershipSerializer(OrganizationMembershipSerializer):
+class CreatedMembershipSerializer(MembershipSerializer):
     user = UserSerializer(read_only=True)
 
 
-class OrganizationMemberCreateSerializer(serializers.ModelSerializer):
+class MemberCreateSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, style={"input_type": "password"})
 
     class Meta:

@@ -1,13 +1,15 @@
 from django.db import models
 
-from .organization_scoped_model import OrganizationScopedModel
+from apps.tenants.models import TenantScopeModel
 
 
-class Department(OrganizationScopedModel):
-    name = models.CharField(max_length=255)
+class Department(TenantScopeModel):
+    name = models.CharField(max_length=100)
+
+    is_active = models.BooleanField(default=True)
 
     class Meta:
         ordering = ["name", "pk"]
 
     def __str__(self) -> str:
-        return self.name
+        return f"{self.name} @ {self.tenant}"
