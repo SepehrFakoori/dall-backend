@@ -193,7 +193,9 @@ REST_FRAMEWORK = {
 
         # Custom Scopes
         "login": "5/minute",
-    }
+    },
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 20,
 }
 
 
@@ -219,10 +221,10 @@ SIMPLE_JWT = {
 
 
 # Explicitly enabled MCP app server factories, keyed by tool namespace.
-# Currently unauthenticated: register only tools suitable for public access.
 
 MCP_SERVERS = {
     "system": "core.mcp.system.create_server",
+    "finance": "apps.finance.mcp.create_server",
 }
 
 

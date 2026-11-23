@@ -1,5 +1,6 @@
 from rest_framework import viewsets
 
+from .filters import CheckFilter
 from .models import AccountType, BankAccount, CheckType, CheckStatus, Check
 from .serializers import (
     AccountTypeSerializer,
@@ -33,3 +34,4 @@ class CheckStatusViewSet(viewsets.ModelViewSet):
 class CheckViewSet(viewsets.ModelViewSet):
     queryset = Check.objects.select_related("type")
     serializer_class = CheckSerializer
+    filterset_class = CheckFilter
