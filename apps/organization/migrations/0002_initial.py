@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ("organizations", "0001_initial"),
+        ("organization", "0001_initial"),
         ("tenants", "0001_initial"),
     ]
 
@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
             field=models.ForeignKey(
                 on_delete=django.db.models.deletion.CASCADE,
                 related_name="memberships",
-                to="organizations.department",
+                to="organization.department",
             ),
         ),
         migrations.AddField(

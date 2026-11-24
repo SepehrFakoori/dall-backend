@@ -6,11 +6,11 @@
       <sourceFolder url="file://$MODULE_DIR$/apps/authorization" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/core/models" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/apps/organizations" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/apps/projects" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/apps/locations" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/apps/finance" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/apps/tenants" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/apps/organization" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
     </content>
     <orderEntry type="jdk" jdkName="~\PycharmProjects\DjangoProject\dall-backend\.venv" jdkType="Python SDK" />

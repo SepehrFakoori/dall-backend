@@ -4,6 +4,6 @@ from .views import TenantViewSet
 
 router = DefaultRouter()
 
-router.register("tenant", TenantViewSet, basename="tenant")
+router.register("tenants", TenantViewSet, basename="tenant")
 
 urlpatterns = router.urls

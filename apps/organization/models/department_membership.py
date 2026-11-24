@@ -1,20 +1,19 @@
 from django.db import models
 
+from core.models import TimeStampedModel
 
-class DepartmentMembership(models.Model):
+
+class DepartmentMembership(TimeStampedModel):
     membership = models.ForeignKey(
         "tenants.Membership",
         on_delete=models.CASCADE,
         related_name="departments",  # department_memberships
     )
     department = models.ForeignKey(
-        "organizations.Department",
+        "organization.Department",
         on_delete=models.CASCADE,
         related_name="memberships",
     )
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ["-created_at"]

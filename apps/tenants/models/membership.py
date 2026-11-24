@@ -1,8 +1,10 @@
 from django.conf import settings
 from django.db import models
 
+from core.models import TimeStampedModel
 
-class Membership(models.Model):
+
+class Membership(TimeStampedModel):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -16,9 +18,6 @@ class Membership(models.Model):
 
     is_active = models.BooleanField(default=True)
 
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
     class Meta:
         ordering = ["created_at"]
         constraints = [
@@ -27,6 +26,20 @@ class Membership(models.Model):
                 name="unique_membership",
             )
         ]
+
+    def activate(self) -> None:
+        if self.is_active:
+            return
+
+        self.is_active = True
+        self.save(update_fields=["is_active", "updated_at"])
+
+    def deactivate(self) -> None:
+        if not self.is_active:
+            return
+
+        self.is_active = False
+        self.save(update_fields=["is_active", "updated_at"])
 
     def __str__(self) -> str:
         return f"{self.user} @ {self.tenant}"

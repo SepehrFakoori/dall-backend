@@ -11,5 +11,19 @@ class Department(TenantScopeModel):
     class Meta:
         ordering = ["name", "pk"]
 
+    def activate(self) -> None:
+        if self.is_active:
+            return
+
+        self.is_active = True
+        self.save(update_fields=["is_active"])
+
+    def deactivate(self) -> None:
+        if not self.is_active:
+            return
+
+        self.is_active = False
+        self.save(update_fields=["is_active"])
+
     def __str__(self) -> str:
         return f"{self.name} @ {self.tenant}"

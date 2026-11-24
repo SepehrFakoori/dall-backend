@@ -1,15 +1,13 @@
 from django.db import models
 
+from core.models import TimeStampedModel
 from .querysets import TenantQuerySet, TenantScopedQuerySet
 
 
-class Tenant(models.Model):
+class Tenant(TimeStampedModel):
     name = models.CharField(max_length=255)
 
     is_active = models.BooleanField(default=True)
-
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
     objects = TenantQuerySet.as_manager()
 
@@ -29,6 +27,7 @@ class TenantScopeModel(models.Model):
         Tenant,
         on_delete=models.PROTECT,
         related_name="+",
+        editable=False,  # هرگز از ورودی کاربر نمی اید.
     )
 
     objects = TenantScopedQuerySet.as_manager()

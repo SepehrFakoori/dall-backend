@@ -68,3 +68,23 @@ class MembershipViewSet(viewsets.ModelViewSet):
             CreatedMembershipSerializer(membership).data,
             status=status.HTTP_201_CREATED,
         )
+
+    @action(detail=True, methods=["post"])
+    def activate(self, request, pk=None, **kwargs):
+        membership = self.get_object()
+        membership.activate()
+
+        return Response(
+            self.get_serializer(membership).data,
+            status=status.HTTP_200_OK,
+        )
+
+    @action(detail=True, methods=["post"])
+    def deactivate(self, request, pk=None, **kwargs):
+        membership = self.get_object()
+        membership.deactivate()
+
+        return Response(
+            self.get_serializer(membership).data,
+            status=status.HTTP_200_OK,
+        )

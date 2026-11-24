@@ -26,7 +26,9 @@ class S3Storage:
             region_name=region,
             config=Config(
                 signature_version="s3v4",
-                s3={"addressing_style": "virtual"}, # path: example.com/bucket | virtual: bucket.example.com/
+                s3={
+                    "addressing_style": "virtual"
+                },  # path: example.com/bucket | virtual: bucket.example.com/
             ),
         )
         return cls(client, bucket=bucket)

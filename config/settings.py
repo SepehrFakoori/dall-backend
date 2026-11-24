@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     "core",
     "apps.users",
     "apps.tenants",
-    "apps.organizations",
+    "apps.organization",
     "apps.projects",
     "apps.technical",
     "apps.finance",

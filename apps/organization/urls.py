@@ -6,7 +6,7 @@ from .views import DepartmentViewSet, DepartmentMembershipViewSet
 
 tenant_router = NestedDefaultRouter(
     router,
-    "tenant",
+    "tenants",
     lookup="tenant",
 )
 
