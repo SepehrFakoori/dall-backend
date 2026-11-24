@@ -22,12 +22,10 @@ class TenantScopeModel(models.Model):
     """
     Base models for Tenant Scope.
     """
-
     tenant = models.ForeignKey(
         Tenant,
         on_delete=models.PROTECT,
         related_name="+",
-        editable=False,  # هرگز از ورودی کاربر نمی اید.
     )
 
     objects = TenantScopedQuerySet.as_manager()
