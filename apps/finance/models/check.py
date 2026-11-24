@@ -19,6 +19,10 @@ class CheckType(TenantScopeModel):
                 fields=["tenant", "name"],
                 name="unique_check_type_per_tenant",
             ),
+            models.UniqueConstraint(
+                fields=["name", "type"],
+                name="unique_check_type_per_direction",
+            ),
         ]
 
     def __str__(self) -> str:
@@ -34,6 +38,10 @@ class CheckStatus(TenantScopeModel):
             models.UniqueConstraint(
                 fields=["tenant", "name"],
                 name="unique_check_status_per_tenant",
+            ),
+            models.UniqueConstraint(
+                fields=["name", "type"],
+                name="unique_check_status_per_direction",
             ),
         ]
 

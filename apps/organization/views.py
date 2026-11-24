@@ -10,17 +10,10 @@ class DepartmentViewSet(viewsets.ModelViewSet):
     serializer_class = DepartmentSerializer
 
     def get_queryset(self):
-        return Department.objects.for_tenant(
-            tenant_id=self.kwargs["tenant_pk"],
-        )
-
-    def perform_create(self, serializer):
-        serializer.save(
-            tenant_id=self.kwargs["tenant_pk"],
-        )
+        return Department.objects.all()
 
     @action(detail=True, methods=["post"])
-    def activate(self, request, pk=None, **kwargs):
+    def activate(self, request, pk=None):
         department = self.get_object()
         department.activate()
 
@@ -30,7 +23,7 @@ class DepartmentViewSet(viewsets.ModelViewSet):
         )
 
     @action(detail=True, methods=["post"])
-    def deactivate(self, request, pk=None, **kwargs):
+    def deactivate(self, request, pk=None):
         department = self.get_object()
         department.deactivate()
 

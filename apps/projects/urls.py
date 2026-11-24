@@ -4,7 +4,7 @@ from .views import ProjectViewSet, UseViewSet
 
 router = DefaultRouter()
 
-router.register("projects", ProjectViewSet)
-router.register("uses", UseViewSet)
+router.register("projects", ProjectViewSet, basename="project")
+router.register("uses", UseViewSet, basename="use")
 
 urlpatterns = router.urls

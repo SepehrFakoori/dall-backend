@@ -49,6 +49,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 
 class LoginView(TokenObtainPairView):
+    tenant_required = False
     serializer_class = LoginSerializer
     throttle_scope = "login"
 

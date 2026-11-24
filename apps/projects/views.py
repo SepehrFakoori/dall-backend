@@ -5,10 +5,14 @@ from .serializers import ProjectSerializer, UseSerializer
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
-    queryset = Project.objects.all()
     serializer_class = ProjectSerializer
+
+    def get_queryset(self):
+        return Project.objects.all()
 
 
 class UseViewSet(viewsets.ModelViewSet):
-    queryset = Use.objects.all()
     serializer_class = UseSerializer
+
+    def get_queryset(self):
+        return Use.objects.all()

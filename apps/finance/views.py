@@ -12,26 +12,36 @@ from .serializers import (
 
 
 class AccountTypeViewSet(viewsets.ModelViewSet):
-    queryset = AccountType.objects.all()
     serializer_class = AccountTypeSerializer
+
+    def get_queryset(self):
+        return AccountType.objects.all()
 
 
 class BankAccountViewSet(viewsets.ModelViewSet):
-    queryset = BankAccount.objects.all()
     serializer_class = BankAccountSerializer
+
+    def get_queryset(self):
+        return BankAccount.objects.all()
 
 
 class CheckTypeViewSet(viewsets.ModelViewSet):
-    queryset = CheckType.objects.all()
     serializer_class = CheckTypeSerializer
+
+    def get_queryset(self):
+        return CheckType.objects.all()
 
 
 class CheckStatusViewSet(viewsets.ModelViewSet):
-    queryset = CheckStatus.objects.all()
     serializer_class = CheckStatusSerializer
+
+    def get_queryset(self):
+        return CheckStatus.objects.all()
 
 
 class CheckViewSet(viewsets.ModelViewSet):
-    queryset = Check.objects.select_related("type")
     serializer_class = CheckSerializer
     filterset_class = CheckFilter
+
+    def get_queryset(self):
+        return Check.objects.select_related("type")

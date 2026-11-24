@@ -18,12 +18,11 @@ from .services import create_tenant_member
 
 
 class TenantViewSet(viewsets.ModelViewSet):
-    queryset = Tenant.objects.all()
+    queryset = Tenant.unscoped.all()
     serializer_class = TenantSerializer
 
 
 class MembershipViewSet(viewsets.ModelViewSet):
-    queryset = Membership.objects.all()
     serializer_class = MembershipSerializer
     permission_classes = (IsAuthenticatedOrReadOnly,)
 

@@ -1,37 +1,19 @@
-from rest_framework_nested.routers import NestedDefaultRouter
+from rest_framework.routers import DefaultRouter
 
-from apps.tenants.urls import router
-from apps.tenants.views import MembershipViewSet
 from .views import DepartmentViewSet, DepartmentMembershipViewSet
 
-tenant_router = NestedDefaultRouter(
-    router,
-    "tenants",
-    lookup="tenant",
-)
+router = DefaultRouter()
 
-tenant_router.register(
-    "memberships",
-    MembershipViewSet,
-    basename="tenant-membership",
-)
-
-tenant_router.register(
+router.register(
     "departments",
     DepartmentViewSet,
-    basename="tenant-department",
+    basename="department",
 )
 
-department_router = NestedDefaultRouter(
-    tenant_router,
-    "departments",
-    lookup="departments",
-)
-
-department_router.register(
+router.register(
     "memberships",
     DepartmentMembershipViewSet,
     basename="department-membership",
 )
 
-urlpatterns = router.urls + tenant_router.urls + department_router.urls
+urlpatterns = router.urls
