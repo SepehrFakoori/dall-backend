@@ -57,6 +57,7 @@ INSTALLED_APPS = [
 
     # Internal
     "core",
+    "apps.files",
     "apps.users",
     "apps.tenants",
     "apps.organization",
@@ -248,3 +249,11 @@ MCP_SERVERS = {
 
 MCP_ALLOWED_HOSTS = env.list("MCP_ALLOWED_HOSTS", default=[])
 MCP_ALLOWED_ORIGINS = env.list("MCP_ALLOWED_ORIGINS", default=[])
+
+
+# S3 AWS Configuration
+S3_BUCKET = env.str("S3_BUCKET", default="")
+S3_REGION = env.str("S3_REGION", default="")
+S3_ENDPOINT_URL = env.str("S3_ENDPOINT_URL", default="")
+S3_ACCESS_KEY_ID = env.str("S3_ACCESS_KEY_ID", default="")
+S3_SECRET_ACCESS_KEY = env.str("S3_SECRET_ACCESS_KEY", default="")
