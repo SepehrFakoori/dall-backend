@@ -1,9 +1,7 @@
 from django.db import models
 
-from apps.tenants.models import TenantScopeModel
 
-
-class Department(TenantScopeModel):
+class Department(models.Model):
     name = models.CharField(max_length=100)
 
     is_active = models.BooleanField(default=True)
@@ -26,4 +24,4 @@ class Department(TenantScopeModel):
         self.save(update_fields=["is_active"])
 
     def __str__(self) -> str:
-        return f"{self.name} @ {self.tenant}"
+        return f"{self.name}"

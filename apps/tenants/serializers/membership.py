@@ -12,12 +12,6 @@ class MembershipSerializer(serializers.ModelSerializer):
         model = Membership
         fields = "__all__"
 
-    def validate_tenant(self, tenant):
-        route_tenant = self.context.get("tenant")
-        if route_tenant is not None and tenant != route_tenant:
-            raise serializers.ValidationError("Use the tenant from the URL.")
-        return tenant
-
 
 class CreatedMembershipSerializer(MembershipSerializer):
     user = UserSerializer(read_only=True)

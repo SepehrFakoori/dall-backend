@@ -1,10 +1,9 @@
 from django.db import models
 
 from core.models import ScopedSerialModel
-from apps.tenants.models import TenantScopeModel
 
 
-class Project(TenantScopeModel, ScopedSerialModel):
+class Project(ScopedSerialModel):
     serial_prefix = "PRJ"
     serial_scope_field = "tenant"
 

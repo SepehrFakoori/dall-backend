@@ -3,13 +3,13 @@ from rest_framework import viewsets, status
 from drf_spectacular.utils import extend_schema
 from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError
-from rest_framework.generics import get_object_or_404
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, SAFE_METHODS
+from rest_framework.generics import RetrieveUpdateAPIView
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny
 from rest_framework.response import Response
 
 from .models import Tenant, Membership
 from .serializers import (
-    TenantSerializer,
+    CurrentTenantSerializer,
     MembershipSerializer,
     CreatedMembershipSerializer,
     MemberCreateSerializer,
@@ -17,31 +17,24 @@ from .serializers import (
 from .services import create_tenant_member
 
 
-class TenantViewSet(viewsets.ModelViewSet):
-    queryset = Tenant.unscoped.all()
-    serializer_class = TenantSerializer
+class CurrentTenantView(RetrieveUpdateAPIView):
+    http_method_names = ["get", "patch", "head", "options"]  # no full PUT
+    serializer_class = CurrentTenantSerializer
+    permission_classes = (AllowAny,)
+
+    def get_object(self):
+        return self.request.tenant
+
+    def update(self, request, *args, **kwargs):
+        kwargs["partial"] = True
+        super().update(request, *args, **kwargs)
+        return Response(self.get_serializer(self.get_object()).data)
 
 
 class MembershipViewSet(viewsets.ModelViewSet):
+    queryset = Membership.objects.all()
     serializer_class = MembershipSerializer
     permission_classes = (IsAuthenticatedOrReadOnly,)
-
-    def initial(self, request, *args, **kwargs):
-        super().initial(request, *args, **kwargs)
-        if request.method not in SAFE_METHODS:
-            tenants = Tenant.objects.all()
-            if not request.user.is_superuser:
-                tenants = tenants.for_user(request.user)
-            self.tenant = get_object_or_404(tenants, pk=self.kwargs["tenant_pk"])
-
-    def get_queryset(self):
-        tenant_id = self.kwargs["tenant_pk"]
-        return super().get_queryset().filter(tenant_id=tenant_id)
-
-    def get_serializer_context(self):
-        context = super().get_serializer_context()
-        context["tenant"] = getattr(self, "tenant", None)
-        return context
 
     @extend_schema(
         responses={status.HTTP_201_CREATED: CreatedMembershipSerializer},
@@ -58,7 +51,7 @@ class MembershipViewSet(viewsets.ModelViewSet):
         serializer.is_valid(raise_exception=True)
         try:
             membership = create_tenant_member(
-                tenant=self.tenant,
+                tenant=self.request.tenant,
                 **serializer.validated_data,
             )
         except DjangoValidationError as exc:

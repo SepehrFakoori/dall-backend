@@ -1,15 +1,13 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
-from apps.tenants.models import TenantScopeModel
-
 
 class CheckDirection(models.TextChoices):
     RECEIVED = "received"
     ISSUED = "issued"
 
 
-class CheckType(TenantScopeModel):
+class CheckType(models.Model):
     name = models.CharField(max_length=100)
     type = models.CharField(max_length=10, choices=CheckDirection.choices)
 
@@ -29,7 +27,7 @@ class CheckType(TenantScopeModel):
         return f"{self.name} @ {self.type}"
 
 
-class CheckStatus(TenantScopeModel):
+class CheckStatus(models.Model):
     name = models.CharField(max_length=255)
     type = models.CharField(max_length=10, choices=CheckDirection.choices)
 
@@ -49,7 +47,7 @@ class CheckStatus(TenantScopeModel):
         return f"{self.name} @ {self.type}"
 
 
-class Check(TenantScopeModel):
+class Check(models.Model):
     purpose = models.CharField(max_length=255)
     description = models.TextField(blank=True)
     sayad_id = models.CharField(max_length=100)

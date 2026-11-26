@@ -2,10 +2,8 @@ import uuid
 
 from django.db import models
 
-from apps.tenants.models import TenantScopeModel
 
-
-class File(TenantScopeModel):
+class File(models.Model):
     id = models.UUIDField(
         primary_key=True,
         default=uuid.uuid4,

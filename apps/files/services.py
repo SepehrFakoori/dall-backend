@@ -2,10 +2,9 @@ from os import path
 import uuid
 
 from django.utils import timezone
-from django.shortcuts import get_object_or_404
 from rest_framework.exceptions import ValidationError
+from django_tenants.utils import get_current_tenant
 
-from apps.tenants.context import get_current_tenant
 from .models import File
 from .policies import get_policy, MIME_EXTENSIONS
 from .s3 import get_s3

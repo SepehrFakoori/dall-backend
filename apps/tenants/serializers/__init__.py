@@ -1,4 +1,4 @@
-from .tenant import TenantSerializer
+from .tenant import CurrentTenantSerializer
 from .membership import (
     MembershipSerializer,
     CreatedMembershipSerializer,

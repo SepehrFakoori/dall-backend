@@ -10,7 +10,6 @@ class ProjectAdmin(admin.ModelAdmin):
         "serial",
         "title",
         "name",
-        "tenant",
         "description",
         "created_at",
         "updated_at",

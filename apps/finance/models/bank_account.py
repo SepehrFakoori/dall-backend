@@ -1,43 +1,23 @@
 from django.db import models
 
-from apps.tenants.models import TenantScopeModel
 
-
-class AccountType(TenantScopeModel):
-    name = models.CharField(max_length=100)
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=["tenant", "name"],
-                name="unique_account_type_per_tenant",
-            ),
-        ]
+class AccountType(models.Model):
+    name = models.CharField(max_length=100, unique=True)
 
     def __str__(self) -> str:
         return self.name
 
 
-class BankAccount(TenantScopeModel):
+class BankAccount(models.Model):
     bank_name = models.CharField(max_length=255)
     branch_name = models.CharField(max_length=100, blank=True)
-    account_number = models.CharField(max_length=20)
-    iban = models.CharField(max_length=24)
+    account_number = models.CharField(max_length=20, unique=True)
+    iban = models.CharField(max_length=24, unique=True)
     account_type = models.ForeignKey(
-        AccountType, on_delete=models.PROTECT, related_name="bank_accounts"
+        AccountType,
+        on_delete=models.PROTECT,
+        related_name="bank_accounts",
     )
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=["tenant", "account_number"],
-                name="unique_account_number_per_tenant",
-            ),
-            models.UniqueConstraint(
-                fields=["tenant", "iban"],
-                name="unique_iban_per_tenant",
-            ),
-        ]
 
     def __str__(self) -> str:
         return f"{self.account_number} @ {self.bank_name}"

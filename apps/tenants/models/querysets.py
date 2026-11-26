@@ -13,11 +13,3 @@ class TenantQuerySet(models.QuerySet):
             memberships__user_id=user.pk,
             memberships__is_active=True,
         )
-
-
-class TenantScopedQuerySet(models.QuerySet):
-    def for_tenant(self, tenant_id):
-        """
-        Limit records to a tenants instance or primary key.
-        """
-        return self.filter(tenant_id=tenant_id)
