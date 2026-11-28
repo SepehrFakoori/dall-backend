@@ -28,6 +28,7 @@ urlpatterns = [
 
     path('', include('apps.tenants.urls')),
     path('', include('apps.users.urls')),
+    path('', include('apps.access.urls')),
     path('', include('apps.organization.urls')),
     path('', include('apps.projects.urls')),
     path('', include('apps.technical.urls')),

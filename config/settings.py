@@ -64,6 +64,7 @@ SHARED_APPS = [
 
 TENANT_APPS = [
     "apps.users",
+    "apps.access",
     "apps.files",
     "apps.organization",
     "apps.projects",

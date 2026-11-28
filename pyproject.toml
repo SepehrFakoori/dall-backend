@@ -1,0 +1,4 @@
+[project]
+dependencies = [
+    "pywin32; sys_platform == 'win32'"
+]
