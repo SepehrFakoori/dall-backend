@@ -30,8 +30,10 @@ urlpatterns = [
     path('', include('apps.users.urls')),
     path('', include('apps.access.urls')),
     path('', include('apps.organization.urls')),
+    path('', include('apps.assets.urls')),
     path('', include('apps.projects.urls')),
     path('', include('apps.technical.urls')),
+    path('', include('apps.checks.urls')),
     path('', include('apps.finance.urls')),
     path('', include('apps.files.urls')),
 ]

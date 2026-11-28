@@ -5,7 +5,6 @@ from core.models import ScopedSerialModel
 
 class Project(ScopedSerialModel):
     serial_prefix = "PRJ"
-    serial_scope_field = "tenant"
 
     title = models.CharField(max_length=100, verbose_name="Project title")
     name = models.CharField(max_length=100, verbose_name="Internal name", blank=True)

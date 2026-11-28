@@ -11,7 +11,7 @@ from rest_framework.exceptions import ValidationError
 
 from apps.tenants.models import Tenant
 
-from .models.check import CheckDirection
+from .models import CheckDirection
 from .serializers import CheckSerializer, CheckStatusSerializer, CheckTypeSerializer
 
 

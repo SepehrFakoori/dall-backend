@@ -2,8 +2,7 @@ from functools import cached_property
 
 from rest_framework import serializers
 
-from ..models import Check, CheckType, CheckStatus
-from ..models.check import CheckDirection
+from .models import Check, CheckType, CheckStatus, CheckDirection
 
 
 class CheckTypeSerializer(serializers.ModelSerializer):
@@ -50,15 +49,6 @@ class CheckSerializer(CheckBaseSerializer):
             "drawer": {"help_text": "Only applies to received checks."},
             "payee": {"help_text": "Only applies to issued checks."},
         }
-
-    def get_fields(self):
-        fields = super().get_fields()
-        tenant = self.context.get("tenant")
-        if tenant is not None:
-            for name in ("type", "status"):
-                field = fields[name]
-                field.queryset = field.queryset.for_tenant(tenant)
-        return fields
 
     @cached_property
     def _serializers_by_direction(self):

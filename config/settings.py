@@ -67,9 +67,11 @@ TENANT_APPS = [
     "apps.access",
     "apps.files",
     "apps.organization",
+    "apps.assets",
     "apps.projects",
     "apps.technical",
     "apps.finance",
+    "apps.checks",
 ]
 
 INSTALLED_APPS = SHARED_APPS + [app for app in TENANT_APPS if app not in SHARED_APPS]
@@ -256,7 +258,7 @@ SIMPLE_JWT = {
 
 MCP_SERVERS = {
     "system": "core.mcp.system.create_server",
-    "finance": "apps.finance.mcp.create_server",
+    "finance": "apps.checks.mcp.create_server",
 }
 
 
